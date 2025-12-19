@@ -1,2 +1,2 @@
-add_library(events events.cpp event_queue.cpp)
+add_library(events events.cpp event_queue.cpp market_data_engine.cpp)
 target_compile_options(events PRIVATE -fmodules-ts)
