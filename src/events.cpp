@@ -4,7 +4,7 @@ module;
 
 export module events;
 
-using time_point = std::chrono::time_point<std::chrono::steady_clock>;
+export using time_point = std::chrono::time_point<std::chrono::steady_clock>;
 
 export struct MarketUpdate {
     int symbol_id;

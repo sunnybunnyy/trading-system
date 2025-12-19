@@ -4,6 +4,7 @@ module;
 #include <chrono>
 
 export module market_data_engine;
+
 import events;
 import event_queue;
 
@@ -14,6 +15,7 @@ public:
 
     void run() {
         using namespace std::chrono_literals;
+        
         int symbol_id = 1;
 
         while(true) {
