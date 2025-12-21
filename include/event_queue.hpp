@@ -1,12 +1,10 @@
-module;
+#pragma once
 
-#include <queue>
-#include <mutex>
 #include <condition_variable>
+#include <mutex>
+#include <queue>
 
-export module event_queue;
-
-export template <typename T>
+template <typename T>
 class EventQueue {
 public:
     void push(const T& item) {
@@ -29,7 +27,7 @@ public:
     }
 
 private:
-    std::queue<T> queue;
-    std::mutex mutex;
     std::condition_variable cv;
+    std::mutex mutex;
+    std::queue<T> queue;
 };

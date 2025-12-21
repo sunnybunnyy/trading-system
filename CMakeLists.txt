@@ -1,10 +1,27 @@
-cmake_minimum_required(VERSION 3.28.3)
+cmake_minimum_required(VERSION 4.2.1)
 project(trading_system VERSION 0.1.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+add_library(lib)
+target_sources(lib
+  PRIVATE
+    src/events.cpp src/market_data_engine.cpp src/strategy_engine.cpp src/execution_engine.cpp
+
+  PUBLIC
+    FILE_SET HEADERS
+    BASE_DIRS
+      include
+    FILES
+      include/events.hpp
+      include/event_queue.hpp
+      include/market_data_engine.hpp
+      include/strategy_engine.hpp
+      include/execution_engine.hpp
+)
+
 add_subdirectory(src)
 add_executable(trading_system main.cpp)
 
-target_link_libraries(trading_system PUBLIC events)
+target_link_libraries(trading_system PRIVATE lib)

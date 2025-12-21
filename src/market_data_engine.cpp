@@ -1,37 +1,25 @@
-module;
-
-#include <thread>
 #include <chrono>
+#include <thread>
+#include "market_data_engine.hpp"
 
-export module market_data_engine;
+MarketDataEngine::MarketDataEngine(EventQueue<MarketUpdate>& out_queue)
+    : out_queue(out_queue) {}
 
-import events;
-import event_queue;
+void MarketDataEngine::run() {
+    using namespace std::chrono_literals;
+    
+    int symbol_id = 1;
 
-export class MarketDataEngine {
-public:
-    MarketDataEngine(EventQueue<MarketUpdate>& out_queue)
-        : out_queue(out_queue) {}
+    while(true) {
+        MarketUpdate update(
+            symbol_id,
+            100.0,
+            100.01,
+            500,
+            400
+        );
 
-    void run() {
-        using namespace std::chrono_literals;
-        
-        int symbol_id = 1;
-
-        while(true) {
-            MarketUpdate update(
-                symbol_id,
-                100.0,
-                100.01,
-                500,
-                400
-            );
-
-            out_queue.push(update);
-            std::this_thread::sleep_for(1ms);
-        }
+        out_queue.push(update);
+        std::this_thread::sleep_for(1ms);
     }
-
-private:
-    EventQueue<MarketUpdate>& out_queue;
-};
+}
