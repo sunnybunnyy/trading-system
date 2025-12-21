@@ -21,7 +21,6 @@ target_sources(lib
       include/execution_engine.hpp
 )
 
-add_subdirectory(src)
 add_executable(trading_system main.cpp)
 
 target_link_libraries(trading_system PRIVATE lib)
