@@ -13,3 +13,11 @@ void OrderBook::sort_books() {
             return a.price < b.price;
         });
 }
+
+inline void update_top_of_book(OrderBook& book, double bid_price, int bid_size, double ask_price, int ask_size) {
+    book.bids.clear();
+    book.asks.clear();
+    
+    book.bids.emplace_back(bid_price, bid_size);
+    book.bids.emplace_back(ask_price, ask_size);
+}
