@@ -19,5 +19,5 @@ inline void update_top_of_book(OrderBook& book, double bid_price, int bid_size, 
     book.asks.clear();
     
     book.bids.emplace_back(bid_price, bid_size);
-    book.bids.emplace_back(ask_price, ask_size);
+    book.asks.emplace_back(ask_price, ask_size);
 }
