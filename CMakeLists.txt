@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_library(lib)
 target_sources(lib
   PRIVATE
-    src/events.cpp src/market_data_engine.cpp src/strategy_engine.cpp src/execution_engine.cpp src/order_book.cpp
+    src/events.cpp src/market_data_engine.cpp src/strategy_engine.cpp src/execution_engine.cpp src/order_book.cpp src/tick.cpp src/tick_loader.cpp
 
   PUBLIC
     FILE_SET HEADERS
@@ -20,6 +20,7 @@ target_sources(lib
       include/strategy_engine.hpp
       include/execution_engine.hpp
       include/order_book.hpp
+      include/tick.hpp
 )
 
 add_executable(trading_system main.cpp)
