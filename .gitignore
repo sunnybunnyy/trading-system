@@ -43,3 +43,4 @@
 # directories
 build/
 .venv/
+data/
