@@ -1,33 +1,18 @@
 #pragma once
 
-#include <condition_variable>
-#include <mutex>
-#include <queue>
+#include <boost/lockfree/spsc_queue.hpp>
 
-template <typename T>
+template <typename T, size_t Capacity>
 class EventQueue {
 public:
-    void push(const T& item) {
-        {
-            std::lock_guard<std::mutex> lock(mutex);
-            queue.push(item);
-        }
-        cv.notify_one();
+    bool push(const T& item) {
+        return queue.push(item);
     }
 
-    T pop() {
-        std::unique_lock<std::mutex> lock(mutex);
-        cv.wait(lock, [this]() { 
-            return !queue.empty();
-        });
-
-        T item = queue.front();
+    bool pop() {
         queue.pop();
-        return item;
     }
 
 private:
-    std::condition_variable cv;
-    std::mutex mutex;
-    std::queue<T> queue;
+    boost::lockfree::spsc_queue< T, boost::lockfree::capacity< Capacity > > queue;
 };
