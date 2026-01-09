@@ -7,7 +7,8 @@ StrategyEngine::StrategyEngine(EventQueue<MarketUpdate>& in_queue)
 
 void StrategyEngine::run() {
     while (true) {
-        MarketUpdate update = in_queue.pop();
+        MarketUpdate update;
+        while(!in_queue.pop(update)); // spin
         time_point now = std::chrono::steady_clock::now();
         auto latency = now - update.timestamp;
 

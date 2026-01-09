@@ -1,6 +1,7 @@
 #include "execution_engine.hpp"
 #include "market_data_engine.hpp"
 #include "strategy_engine.hpp"
+#include <thread>
 
 int main(int, char**) {
     EventQueue<MarketUpdate> market_to_strategy;

@@ -21,7 +21,7 @@ void MarketDataEngine::run() {
 
         int slashPos = path.rfind("/");
         int dotPos = path.find(".");
-        std::string ticker = path.substr(slashPos, dotPos + 1);
+        std::string ticker = path.substr(slashPos, dotPos - slashPos - 1);
         
         MarketUpdate update{
             ticker,
@@ -30,6 +30,6 @@ void MarketDataEngine::run() {
             curr.direction
         };
 
-        out_queue.push(update);
+        while(!out_queue.push(update)); // spin
     }
 }
