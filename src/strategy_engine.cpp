@@ -12,6 +12,6 @@ void StrategyEngine::run() {
         time_point now = std::chrono::steady_clock::now();
         auto latency = now - update.timestamp;
 
-        std::cout << "Strategy received update. Latency(ns): " << latency << std::endl;
+        //std::cout << "Strategy received update. Latency(ns): " << latency << std::endl;
     }
 }

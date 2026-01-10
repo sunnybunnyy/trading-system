@@ -1,4 +1,5 @@
 #include <chrono>
+#include <iostream>
 #include <thread>
 #include "market_data_engine.hpp"
 #include "tick_loader.hpp"
@@ -7,16 +8,17 @@ MarketDataEngine::MarketDataEngine(EventQueue<MarketUpdate>& out_queue)
     : out_queue(out_queue) {}
 
 void MarketDataEngine::run() {
+    using namespace std::chrono_literals;
     std::string path = "data/AAPL.csv";
     std::vector<Tick> ticks = load_ticks(path);
     const double speedup = 10.0;
+    time_point start = std::chrono::steady_clock::now();
 
     for (size_t i = 1; i < ticks.size(); ++i) {
         const Tick& prev = ticks[i - 1];
         const Tick& curr = ticks[i];
         auto duration = (curr.timestamp - prev.timestamp).count();
         auto sleep_duration = static_cast<int64_t>(duration / speedup);
-
         std::this_thread::sleep_for(std::chrono::nanoseconds{sleep_duration});
 
         int slashPos = path.rfind("/");
@@ -31,5 +33,10 @@ void MarketDataEngine::run() {
         };
 
         while(!out_queue.push(update)); // spin
+
+        if (i == ticks.size() - 1) {
+            time_point end =  std::chrono::steady_clock::now();
+            std::cout << ticks.size() << " updates in " << (end - start) / 1ms << "ms" << std::endl;;
+        }
     }
 }
