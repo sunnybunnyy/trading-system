@@ -1,13 +1,13 @@
 #pragma once
 
-#include "events.hpp"
 #include "event_queue.hpp"
+#include "order.hpp"
 
 class StrategyEngine {
 public:
-    StrategyEngine(EventQueue<MarketUpdate>& in_queue);
+    StrategyEngine(EventQueue<Order>& in_queue);
     void run();
 
 private:
-    EventQueue<MarketUpdate>& in_queue;
+    EventQueue<Order>& in_queue;
 };

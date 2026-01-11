@@ -8,20 +8,24 @@ find_package(Boost REQUIRED)
 add_library(lib)
 target_sources(lib
   PRIVATE
-    src/events.cpp src/market_data_engine.cpp src/strategy_engine.cpp src/execution_engine.cpp src/order_book.cpp src/tick.cpp src/tick_loader.cpp
+    src/market_data_engine.cpp
+    src/strategy_engine.cpp
+    src/execution_engine.cpp
+    src/order.cpp
+    src/order_book.cpp
+    src/tick_loader.cpp
 
   PUBLIC
     FILE_SET HEADERS
     BASE_DIRS
       include
     FILES
-      include/events.hpp
       include/event_queue.hpp
       include/market_data_engine.hpp
       include/strategy_engine.hpp
       include/execution_engine.hpp
+      include/order.hpp
       include/order_book.hpp
-      include/tick.hpp
 )
 
 add_executable(trading_system main.cpp)

@@ -2,9 +2,9 @@
 
 #include <string>
 #include <vector>
-#include "tick.hpp"
+#include "order.hpp"
 
 using Clock = std::chrono::steady_clock;
 using TimePoint = std::chrono::time_point<Clock>;
 
-std::vector<Tick> load_ticks(const std::string& path);
+std::vector<Order> load_orders(const std::string &path);

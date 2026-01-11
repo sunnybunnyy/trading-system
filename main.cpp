@@ -4,7 +4,7 @@
 #include <thread>
 
 int main(int, char**) {
-    EventQueue<MarketUpdate> market_to_strategy;
+    EventQueue<Order> market_to_strategy;
 
     MarketDataEngine market(market_to_strategy);
     StrategyEngine strategy(market_to_strategy);
