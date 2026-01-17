@@ -2,15 +2,11 @@
 
 #include <algorithm>
 #include <vector>
-
-struct PriceLevel {
-    double price;
-    int size;
-};
+#include "order.hpp"
 
 struct OrderBook {
-    std::vector<PriceLevel> bids;
-    std::vector<PriceLevel> asks;
+    std::vector<Order> bids;
+    std::vector<Order> asks;
 
     void sort_books();
 };

@@ -29,8 +29,7 @@ void MarketDataEngine::run()
             curr.dir
         };
 
-        while (!out_queue.push(update))
-            ; // spin
+        while (!out_queue.push(update)); // spin
 
         if (i == orders.size() - 1)
         {

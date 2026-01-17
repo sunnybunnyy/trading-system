@@ -11,11 +11,11 @@ enum direction {
 };
 
 struct Order {
-    int price;
+    double price;
     int size;
     direction dir;
     time_point timestamp = std::chrono::steady_clock::now();
 
     Order();
-    Order(int price, int size, direction dir);
+    Order(double price, int size, direction dir);
 };
