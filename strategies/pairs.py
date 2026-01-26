@@ -17,3 +17,18 @@ class Pairs:
 
         if self.count < self.window:
             return 0
+
+        beta = np.linalg.lstsq(self.x.reshape(-1, 1), self.y)[0][0]
+        spread = self.y - beta * self.x
+
+        mean = spread.mean()
+        std = spread.std()
+        z = (spread[-1] - mean) / std
+
+        if z > 2:
+            self.position = -1
+            return -1
+        elif z < -2:
+            self.position = 1
+            return 1
+        return 0
